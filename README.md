@@ -56,7 +56,46 @@ class MyHomePage extends StatelessWidget {
 
 
 
+![](https://raw.githubusercontent.com/burakcanyildirim/timestamp_time_ago/master/firebase-timestamp.JPG)
 
+
+
+
+### Use this Widget
+```dart
+                     TimeStampTimeAgo(
+                          timeStampData:
+                              snapshot.data.docs[index].data()['activitytime'],
+                        ),
+```
+
+#### Output
+![](https://github.com/burakcanyildirim/timestamp_time_ago/blob/master/package-screenshot.png?raw=true)
+
+
+
+#### Others
+
+```dart
+TimeStampTimeAgo(
+                          timeStampData:
+                              snapshot.data.docs[index].data()['activitytime'],
+                          yearAgo: 'yıl önce',
+                          monthAgo: 'ay önce',
+                          dayAgo: 'gün önce',
+                          hourAgo: 'saat önce',
+                          minuteAgo: 'dakika önce',
+                          minuteLater: 'dakika sonra',
+                          hourLater: 'saat sonra',
+                          dayLater: 'gün sonra',
+                          monthLater: 'ay sonra',
+                          yearLater: 'yıl sonra',
+                          textFontSize: 20,
+                          textColor: Colors.purple,
+                          textFontWeight: FontWeight.bold,
+                          fontFamily: 'Klavika',
+                        ),
+```
+
+#### Output
 ![]()
-
-![]() ![]
