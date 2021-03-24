@@ -98,4 +98,4 @@ TimeStampTimeAgo(
 ```
 
 #### Output
-![]()
+![](https://github.com/burakcanyildirim/timestamp_time_ago/blob/master/screenshot-2.png?raw=true)
