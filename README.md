@@ -61,7 +61,7 @@ class MyHomePage extends StatelessWidget {
 
 
 
-### Use this Widget
+## Use this Widget
 ```dart
                      TimeStampTimeAgo(
                           timeStampData:
@@ -69,17 +69,16 @@ class MyHomePage extends StatelessWidget {
                         ),
 ```
 
-#### Output
+## Output
 ![](https://github.com/burakcanyildirim/timestamp_time_ago/blob/master/package-screenshot.png?raw=true)
 
 
 
-#### Others
+## Others
 
 ```dart
-TimeStampTimeAgo(
-                          timeStampData:
-                              snapshot.data.docs[index].data()['activitytime'],
+                    TimeStampTimeAgo(
+                          timeStampData: snapshot.data.docs[index].data()['activitytime'],
                           yearAgo: 'yıl önce',
                           monthAgo: 'ay önce',
                           dayAgo: 'gün önce',
@@ -97,5 +96,5 @@ TimeStampTimeAgo(
                         ),
 ```
 
-#### Output
+## Output
 ![](https://github.com/burakcanyildirim/timestamp_time_ago/blob/master/screenshot-2.png?raw=true)
