@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1]
 
-* Package created.
+* **Package created.**
+
+## [0.0.2]
+
+* **Readme updated.**

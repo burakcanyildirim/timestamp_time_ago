@@ -1,6 +1,6 @@
 name: timestamp_time_ago
-description: You can convert timestamp type data to time ago and time later.
-version: 0.0.1
+description: Convert timestamp type data to time ago and time later.
+version: 0.0.2
 author: Burak Can Yildirim<burakyildirim383@gmail.com>
 homepage: https://github.com/burakcanyildirim/timestamp_time_ago.git
 
