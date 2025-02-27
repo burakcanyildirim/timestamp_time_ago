@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TimeStampTimeAgo extends StatelessWidget {
-  final timeStampData;
+  final DateTime timeStampData;
   final Color textColor;
   final double textFontSize;
   final FontWeight textFontWeight;
@@ -17,105 +17,93 @@ class TimeStampTimeAgo extends StatelessWidget {
   final String monthLater;
   final String yearLater;
 
-  TimeStampTimeAgo(
-      {Key key,
-        @required this.timeStampData,
-        this.textColor: Colors.black,
-        this.textFontSize: 14,
-        this.textFontWeight: FontWeight.w400,
-        this.fontFamily: "roboto",
-        this.yearAgo: 'years ago',
-        this.monthAgo: 'months ago',
-        this.dayAgo: 'days ago',
-        this.hourAgo: 'hours ago',
-        this.minuteAgo: 'minutes ago',
-        this.minuteLater: 'minutes later',
-        this.hourLater: 'hours later',
-        this.dayLater: 'days later',
-        this.monthLater: 'months later',
-        this.yearLater: 'years later'})
-      : assert(timeStampData != null),
-        super(key: key);
+  const TimeStampTimeAgo({
+    Key? key,
+    required this.timeStampData,
+    this.textColor = Colors.black,
+    this.textFontSize = 14,
+    this.textFontWeight = FontWeight.w400,
+    this.fontFamily = "roboto",
+    this.yearAgo = 'years ago',
+    this.monthAgo = 'months ago',
+    this.dayAgo = 'days ago',
+    this.hourAgo = 'hours ago',
+    this.minuteAgo = 'minutes ago',
+    this.minuteLater = 'minutes later',
+    this.hourLater = 'hours later',
+    this.dayLater = 'days later',
+    this.monthLater = 'months later',
+    this.yearLater = 'years later',
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //TimeStamp to DateTime
-    DateTime convertDateTime = DateTime.fromMillisecondsSinceEpoch(
-        timeStampData.millisecondsSinceEpoch);
+    // Zaman farkı hesaplaması için ilgili DateTime
+    final DateTime dateTime = timeStampData;
+    final Duration difference = DateTime.now().difference(dateTime);
 
-    //Minute
-    int minute = DateTime.now().difference(convertDateTime).inMinutes;
-    int convertPositiveMinute =
-        DateTime.now().difference(convertDateTime).inMinutes * -1;
+    // Geçmiş için değerler
+    final int minute = difference.inMinutes;
+    final int hour = difference.inHours;
+    final int day = difference.inDays;
+    final int month = (difference.inDays / 30).floor();
+    final int differenceInYear = (difference.inDays / 365).floor();
 
-    //Hour
-    int hour = DateTime.now().difference(convertDateTime).inHours;
-    int convertPositiveHour =
-        DateTime.now().difference(convertDateTime).inHours * -1;
-
-    //Day
-    int day = DateTime.now().difference(convertDateTime).inDays;
-    int convertPositiveDay = (day * -1) + 1;
-
-    //Convert Duration
-    Duration duration = DateTime.now().difference(convertDateTime);
-
-    //Month
-    int month = (duration.inDays / 30).floor();
-    int convertPositiveMonth = (duration.inDays / 30 * -1).floor();
-
-    //Year
-    int differenceInYear = (duration.inDays / 365).floor();
-    int convertPositiveDifferenceInYear = (duration.inDays / 365 * -1).floor();
+    // Gelecek için pozitif değerler
+    final int convertPositiveMinute = -minute;
+    final int convertPositiveHour = -hour;
+    final int convertPositiveDay = -day + 1;
+    final int convertPositiveMonth = (-difference.inDays / 30).floor();
+    final int convertPositiveDifferenceInYear = (-difference.inDays / 365).floor();
 
     if (hour >= 8760) {
       return Text(
-        '$differenceInYear' + ' $yearAgo',
+        '$differenceInYear $yearAgo',
         style: buildTextStyle(),
       );
     } else if (hour >= 720 && hour < 8760) {
       return Text(
-        '$month' + ' $monthAgo',
+        '$month $monthAgo',
         style: buildTextStyle(),
       );
     } else if (hour >= 24 && hour < 720) {
       return Text(
-        '$day' + ' $dayAgo',
+        '$day $dayAgo',
         style: buildTextStyle(),
       );
     } else if (hour >= 1 && hour < 24) {
       return Text(
-        '$hour' + ' $hourAgo',
+        '$hour $hourAgo',
         style: buildTextStyle(),
       );
     } else if (minute >= 0 && minute <= 60) {
       return Text(
-        '$minute' + ' $minuteAgo',
+        '$minute $minuteAgo',
         style: buildTextStyle(),
       );
-    } else if (minute <= 0 && minute >= -60) {
+    } else if (minute < 0 && minute >= -60) {
       return Text(
-        '$convertPositiveMinute' + ' $minuteLater',
+        '$convertPositiveMinute $minuteLater',
         style: buildTextStyle(),
       );
-    } else if (hour <= 0 && hour >= -24) {
+    } else if (hour < 0 && hour >= -24) {
       return Text(
-        '$convertPositiveHour' + ' $hourLater',
+        '$convertPositiveHour $hourLater',
         style: buildTextStyle(),
       );
     } else if (hour < -24 && hour >= -720) {
       return Text(
-        '$convertPositiveDay' + ' $dayLater',
+        '$convertPositiveDay $dayLater',
         style: buildTextStyle(),
       );
-    } else if (hour <= -720 && hour >= -8760) {
+    } else if (hour < -720 && hour >= -8760) {
       return Text(
-        '$convertPositiveMonth ' + ' $monthLater',
+        '$convertPositiveMonth $monthLater',
         style: buildTextStyle(),
       );
     } else if (hour < -8760) {
       return Text(
-        '$convertPositiveDifferenceInYear' + ' $yearLater',
+        '$convertPositiveDifferenceInYear $yearLater',
         style: buildTextStyle(),
       );
     } else {
@@ -127,9 +115,9 @@ class TimeStampTimeAgo extends StatelessWidget {
   }
 
   TextStyle buildTextStyle() => TextStyle(
-    fontSize: textFontSize,
-    color: textColor,
-    fontWeight: textFontWeight,
-    fontFamily: fontFamily,
-  );
+        fontSize: textFontSize,
+        color: textColor,
+        fontWeight: textFontWeight,
+        fontFamily: fontFamily,
+      );
 }
